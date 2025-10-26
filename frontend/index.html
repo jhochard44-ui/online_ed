@@ -458,6 +458,56 @@
         line-height: 1.5;
       }
 
+      .module-list {
+        display: grid;
+        gap: 0.65rem;
+        margin-top: 1rem;
+      }
+
+      .module-item {
+        background: rgba(79, 70, 229, 0.14);
+        border-radius: 14px;
+        padding: 0.75rem 0.9rem;
+        border: 1px solid rgba(103, 80, 245, 0.18);
+      }
+
+      .module-item strong {
+        display: block;
+        color: #fff;
+        margin-bottom: 0.35rem;
+        font-size: 0.95rem;
+      }
+
+      .module-item span {
+        font-size: 0.85rem;
+        color: rgba(226, 232, 240, 0.75);
+      }
+
+      .availability-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+
+      .availability-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(246, 195, 68, 0.2);
+        color: #fde68a;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin: 0.75rem 0;
+      }
+
       .status-message {
         margin: 0;
         color: var(--slate-300);
@@ -470,18 +520,26 @@
         border: 1px solid rgba(103, 80, 245, 0.25);
         padding: clamp(1.75rem, 4vw, 2.75rem);
         display: grid;
-        gap: 1.3rem;
+        gap: 1.5rem;
       }
 
       form {
         display: grid;
-        gap: 1.1rem;
+        gap: 1.25rem;
+      }
+
+      .form-columns {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
       label {
         font-weight: 600;
         color: #fff;
         font-size: 0.95rem;
+        display: grid;
+        gap: 0.35rem;
       }
 
       input,
@@ -494,6 +552,7 @@
         background: rgba(15, 23, 42, 0.65);
         color: #fff;
         font: inherit;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
       }
 
       textarea {
@@ -505,6 +564,8 @@
       textarea:focus {
         outline: 2px solid rgba(103, 80, 245, 0.55);
         outline-offset: 2px;
+        border-color: rgba(103, 80, 245, 0.45);
+        box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.18);
       }
 
       button[type="submit"] {
@@ -516,16 +577,30 @@
         border-radius: 999px;
         cursor: pointer;
         box-shadow: 0 18px 28px rgba(246, 195, 68, 0.25);
-        transition: transform 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
       button[type="submit"]:hover {
         transform: translateY(-1px);
+        box-shadow: 0 22px 36px rgba(246, 195, 68, 0.32);
       }
 
       .form-note {
         color: var(--slate-300);
         margin: 0;
+      }
+
+      .form-note.success {
+        color: #a7f3d0;
+      }
+
+      .form-note.error {
+        color: #fca5a5;
+      }
+
+      .input-hint {
+        font-size: 0.8rem;
+        color: rgba(226, 232, 240, 0.6);
       }
 
       footer {
@@ -695,31 +770,81 @@
           </div>
           <div class="form-card">
             <form id="bookingForm">
-              <div>
-                <label for="name">Full name</label>
-                <input type="text" id="name" name="name" placeholder="Jordan Rivera" required />
+              <div class="form-columns">
+                <div>
+                  <label for="bookingConcept">
+                    Learning focus
+                    <select id="bookingConcept" required>
+                      <option value="">Loading live concepts...</option>
+                    </select>
+                  </label>
+                  <span class="input-hint">Pulled from the Luminary Nexus API curriculum.</span>
+                </div>
+                <div>
+                  <label for="bookingExpert">
+                    Expert partner
+                    <select id="bookingExpert" required disabled>
+                      <option value="">Select a focus first</option>
+                    </select>
+                  </label>
+                  <span class="input-hint">Filtered automatically to the selected learning focus.</span>
+                </div>
+              </div>
+              <div class="form-columns">
+                <div>
+                  <label for="sessionStart">
+                    Preferred start time
+                    <input type="datetime-local" id="sessionStart" required />
+                  </label>
+                </div>
+                <div>
+                  <label for="sessionDuration">
+                    Session duration (minutes)
+                    <input type="number" id="sessionDuration" min="30" step="15" value="60" required />
+                  </label>
+                </div>
+                <div>
+                  <label for="groupSize">
+                    Group size
+                    <input type="number" id="groupSize" min="1" max="20" value="1" />
+                  </label>
+                </div>
               </div>
               <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="jordan@studio.io" required />
+                <label for="name">
+                  Primary contact
+                  <input type="text" id="name" placeholder="Jordan Rivera" required />
+                </label>
               </div>
               <div>
-                <label for="discipline">Target discipline</label>
-                <select id="discipline" name="discipline" required>
-                  <option value="">Select a focus area</option>
-                </select>
+                <label for="email">
+                  Contact email
+                  <input type="email" id="email" placeholder="jordan@studio.io" required />
+                </label>
               </div>
               <div>
-                <label for="goal">What outcome are you pursuing?</label>
-                <textarea id="goal" name="goal" placeholder="Prototype a climate resilient urban planning solution..." required></textarea>
+                <label for="discipline">
+                  Strategic discipline
+                  <select id="discipline" required>
+                    <option value="">Select a focus area</option>
+                  </select>
+                </label>
               </div>
               <div>
-                <label for="timeline">Preferred timeline</label>
-                <input type="text" id="timeline" name="timeline" placeholder="2-week sprint" />
+                <label for="goal">
+                  What outcome are you pursuing?
+                  <textarea id="goal" placeholder="Prototype a climate resilient urban planning solution..." required></textarea>
+                </label>
+              </div>
+              <div>
+                <label for="timeline">
+                  Desired timeline
+                  <input type="text" id="timeline" placeholder="2-week sprint" />
+                </label>
               </div>
               <button type="submit">Submit booking request</button>
             </form>
-            <p id="bookingStatus" class="form-note"></p>
+            <p id="bookingStatus" class="form-note" role="status"></p>
           </div>
         </div>
       </section>
@@ -734,6 +859,17 @@
       const API_BASE = "https://savage-incantation-x5gqqrrjrrqfpqp7-8000.app.github.dev";
       const sections = document.querySelectorAll("main section");
       const navButtons = document.querySelectorAll(".nav-links button, .cta-group a");
+      const bookingForm = document.getElementById("bookingForm");
+      const bookingStatus = document.getElementById("bookingStatus");
+      const submitButton = bookingForm?.querySelector("button[type='submit']");
+      const conceptSelect = document.getElementById("bookingConcept");
+      const expertSelect = document.getElementById("bookingExpert");
+      const sessionStartInput = document.getElementById("sessionStart");
+      const sessionDurationInput = document.getElementById("sessionDuration");
+      const groupSizeInput = document.getElementById("groupSize");
+
+      let liveConcepts = [];
+      let liveExperts = [];
 
       function activateSection(targetId) {
         sections.forEach((section) => {
@@ -1055,87 +1191,357 @@
 
       renderExperts(expertsByField[0].field);
 
+      const conceptStatusEl = document.getElementById("conceptsStatus");
+      const conceptGrid = document.getElementById("conceptGrid");
+      const expertsStatusEl = document.getElementById("expertsStatus");
+      const liveExpertsGrid = document.getElementById("liveExperts");
+
+      function populateConceptOptions() {
+        if (!conceptSelect) {
+          return;
+        }
+        const previous = conceptSelect.value;
+        if (!liveConcepts.length) {
+          conceptSelect.innerHTML = '<option value="">No concepts available</option>';
+          conceptSelect.disabled = true;
+          return;
+        }
+        conceptSelect.disabled = false;
+        conceptSelect.innerHTML = ['<option value="">Select a learning focus</option>', ...liveConcepts.map((concept) => `<option value="${concept.id}">${concept.title}</option>`)].join("");
+        if (previous && liveConcepts.some((concept) => concept.id === previous)) {
+          conceptSelect.value = previous;
+        }
+      }
+
+      function updateExpertOptions(conceptId = "") {
+        if (!expertSelect) {
+          return;
+        }
+
+        if (!liveExperts.length) {
+          expertSelect.innerHTML = '<option value="">Experts loading...</option>';
+          expertSelect.disabled = true;
+          return;
+        }
+
+        if (!conceptId) {
+          expertSelect.innerHTML = '<option value="">Select a focus first</option>';
+          expertSelect.disabled = true;
+          return;
+        }
+
+        const relevantExperts = liveExperts.filter(
+          (expert) =>
+            Array.isArray(expert.focus_areas) &&
+            expert.focus_areas.some((area) => area.toLowerCase() === conceptId.toLowerCase())
+        );
+
+        if (!relevantExperts.length) {
+          expertSelect.innerHTML = '<option value="">No experts cover this focus yet</option>';
+          expertSelect.disabled = true;
+          return;
+        }
+
+        const previous = expertSelect.value;
+        expertSelect.disabled = false;
+        expertSelect.innerHTML = ['<option value="">Select an expert</option>', ...relevantExperts.map((expert) => `<option value="${expert.id}">${expert.name}</option>`)].join("");
+        if (previous && relevantExperts.some((expert) => expert.id === previous)) {
+          expertSelect.value = previous;
+        }
+      }
+
+      function titleCase(text = "") {
+        return text
+          .split(" ")
+          .filter(Boolean)
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
+
+      function formatCurrency(value) {
+        const amount = Number(value);
+        if (!Number.isFinite(amount)) {
+          return "On request";
+        }
+        return new Intl.NumberFormat(undefined, {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(amount);
+      }
+
+      function formatTimeValue(value) {
+        if (!value) {
+          return "";
+        }
+        try {
+          if (typeof value === "string" && value.includes(":")) {
+            const [hour, minute] = value.split(":");
+            const date = new Date();
+            date.setHours(Number(hour), Number(minute));
+            return new Intl.DateTimeFormat(undefined, {
+              hour: "numeric",
+              minute: "2-digit",
+            }).format(date);
+          }
+          const date = new Date(value);
+          if (Number.isNaN(date.valueOf())) {
+            return String(value);
+          }
+          return new Intl.DateTimeFormat(undefined, {
+            hour: "numeric",
+            minute: "2-digit",
+          }).format(date);
+        } catch (error) {
+          return String(value);
+        }
+      }
+
+      function formatAvailability(slot = {}) {
+        const weekday = titleCase(String(slot.weekday || "").replace(/-/g, " "));
+        const start = formatTimeValue(slot.start);
+        const end = formatTimeValue(slot.end);
+        const timeWindow = start && end ? `${start} – ${end}` : start || end;
+        return [weekday, timeWindow].filter(Boolean).join(" · ");
+      }
+
+      function renderModuleList(modules) {
+        if (!Array.isArray(modules) || !modules.length) {
+          return "";
+        }
+        return `<div class="module-list">${modules
+          .map(
+            (module) => `
+              <div class="module-item">
+                <strong>${module.title}</strong>
+                <span>${module.content_summary}</span>
+              </div>
+            `
+          )
+          .join("")}</div>`;
+      }
+
+      function renderLiveExpert(expert) {
+        const focusAreas = Array.isArray(expert.focus_areas) && expert.focus_areas.length
+          ? `<div class="pill-row">${expert.focus_areas
+              .map((area) => `<span class="pill">${titleCase(area.replace(/-/g, " "))}</span>`)
+              .join("")}</div>`
+          : "";
+
+        const availability = Array.isArray(expert.availability) && expert.availability.length
+          ? `<div class="availability-grid">${expert.availability
+              .map((slot) => `<span class="availability-chip">${formatAvailability(slot)}</span>`)
+              .join("")}</div>`
+          : "";
+
+        const discount = Number(expert.group_discount);
+        const groupRate = Number.isFinite(discount)
+          ? `<p><strong>Group sessions:</strong> ${discount === 1 ? "Same as solo pricing" : `${(discount * 100).toFixed(0)}% of solo pricing`}</p>`
+          : "";
+
+        return `
+          <article class="api-item">
+            <h4>${expert.name}</h4>
+            <p>${expert.credentials || expert.title || "Subject-matter expert"}</p>
+            ${focusAreas}
+            <p><strong>Rate:</strong> ${formatCurrency(expert.rate_per_hour)} / hour</p>
+            ${groupRate}
+            ${availability}
+          </article>
+        `;
+      }
+
       async function fetchConcepts() {
-        const status = document.getElementById("conceptsStatus");
-        const grid = document.getElementById("conceptGrid");
+        if (!conceptStatusEl || !conceptGrid) {
+          return;
+        }
+        conceptStatusEl.textContent = "Loading concepts from the live platform...";
         try {
           const response = await fetch(`${API_BASE}/concepts`);
           if (!response.ok) {
             throw new Error(`Status ${response.status}`);
           }
-          const data = await response.json();
-          status.textContent = data.length ? `Loaded ${data.length} concepts.` : "No concepts available right now.";
-          grid.innerHTML = data
-            .map(
-              (item) => `
-              <article class="api-item">
-                <h4>${item.title || item.name || "Concept"}</h4>
-                <p>${item.description || item.summary || "No description provided."}</p>
-              </article>
-            `
-            )
-            .join("");
+          const payload = await response.json();
+          const concepts = Array.isArray(payload) ? payload : Array.isArray(payload?.concepts) ? payload.concepts : [];
+          liveConcepts = concepts;
+          populateConceptOptions();
+          updateExpertOptions(conceptSelect?.value || "");
+          conceptStatusEl.textContent = concepts.length
+            ? `Loaded ${concepts.length} concepts from the live platform.`
+            : "No concepts available right now.";
+          conceptGrid.innerHTML = concepts.length
+            ? concepts
+                .map(
+                  (item) => `
+                  <article class="api-item">
+                    <h4>${item.title}</h4>
+                    <p>${item.summary || item.description || "No summary provided."}</p>
+                    ${item.why_it_matters ? `<p><strong>Why it matters:</strong> ${item.why_it_matters}</p>` : ""}
+                    ${renderModuleList(item.modules)}
+                  </article>
+                `
+                )
+                .join("")
+            : '<p class="status-message">No concepts available right now.</p>';
         } catch (error) {
-          status.textContent = "Unable to load concepts from the API. Please try again later.";
-          grid.innerHTML = "";
+          conceptStatusEl.textContent = "Unable to load concepts from the API. Please try again later.";
+          conceptGrid.innerHTML = "";
+          liveConcepts = [];
+          populateConceptOptions();
+          updateExpertOptions("");
           console.error(error);
         }
       }
 
       async function fetchExperts() {
-        const status = document.getElementById("expertsStatus");
-        const grid = document.getElementById("liveExperts");
+        if (!expertsStatusEl || !liveExpertsGrid) {
+          return;
+        }
+        expertsStatusEl.textContent = "Loading experts from the live platform...";
         try {
           const response = await fetch(`${API_BASE}/experts`);
           if (!response.ok) {
             throw new Error(`Status ${response.status}`);
           }
-          const data = await response.json();
-          status.textContent = data.length ? `Live roster: ${data.length} experts currently published.` : "No experts available right now.";
-          grid.innerHTML = data
-            .map(
-              (expert) => `
-              <article class="api-item">
-                <h4>${expert.name}</h4>
-                <p>${expert.title || expert.specialty || "Specialist"}</p>
-                <p>${expert.affiliation || expert.focus || ""}</p>
-              </article>
-            `
-            )
-            .join("");
+          const payload = await response.json();
+          const experts = Array.isArray(payload) ? payload : Array.isArray(payload?.experts) ? payload.experts : [];
+          liveExperts = experts;
+          updateExpertOptions(conceptSelect?.value || "");
+          expertsStatusEl.textContent = experts.length
+            ? `Live roster: ${experts.length} experts currently published.`
+            : "No experts available right now.";
+          liveExpertsGrid.innerHTML = experts.length
+            ? experts.map((expert) => renderLiveExpert(expert)).join("")
+            : '<p class="status-message">No experts available right now.</p>';
         } catch (error) {
-          status.textContent = "Unable to load live experts from the API. Please try again later.";
-          grid.innerHTML = "";
+          expertsStatusEl.textContent = "Unable to load live experts from the API. Please try again later.";
+          liveExpertsGrid.innerHTML = "";
+          liveExperts = [];
+          updateExpertOptions("");
           console.error(error);
         }
       }
 
-      const bookingForm = document.getElementById("bookingForm");
-      const bookingStatus = document.getElementById("bookingStatus");
+      function setBookingStatus(message, type = "") {
+        if (!bookingStatus) {
+          return;
+        }
+        bookingStatus.textContent = message;
+        bookingStatus.className = `form-note${type ? ` ${type}` : ""}`;
+      }
 
-      bookingForm.addEventListener("submit", async (event) => {
+      conceptSelect?.addEventListener("change", (event) => {
+        updateExpertOptions(event.target.value);
+        setBookingStatus("", "");
+      });
+
+      expertSelect?.addEventListener("change", () => {
+        setBookingStatus("", "");
+      });
+
+      bookingForm?.addEventListener("submit", async (event) => {
         event.preventDefault();
-        bookingStatus.textContent = "Submitting your request...";
-        bookingStatus.style.color = "var(--slate-300)";
-        const formData = new FormData(bookingForm);
-        const payload = Object.fromEntries(formData.entries());
+
+        if (!conceptSelect || !expertSelect || !sessionStartInput || !sessionDurationInput) {
+          return;
+        }
+
+        const conceptId = conceptSelect.value;
+        if (!conceptId) {
+          setBookingStatus("Select a learning focus to continue.", "error");
+          conceptSelect.focus();
+          return;
+        }
+
+        const expertId = expertSelect.value;
+        if (!expertId) {
+          setBookingStatus("Choose an expert partner to continue.", "error");
+          expertSelect.focus();
+          return;
+        }
+
+        const startValue = sessionStartInput.value;
+        if (!startValue) {
+          setBookingStatus("Provide a preferred start time.", "error");
+          sessionStartInput.focus();
+          return;
+        }
+
+        const startDate = new Date(startValue);
+        if (Number.isNaN(startDate.valueOf())) {
+          setBookingStatus("Use a valid date and time for your session.", "error");
+          sessionStartInput.focus();
+          return;
+        }
+
+        const duration = Number(sessionDurationInput.value);
+        if (!Number.isFinite(duration) || duration <= 0) {
+          setBookingStatus("Enter a valid session duration.", "error");
+          sessionDurationInput.focus();
+          return;
+        }
+
+        const clientNameInput = document.getElementById("name");
+        const clientName = clientNameInput?.value.trim() || "";
+        if (!clientName) {
+          setBookingStatus("Add the primary contact name so we can confirm details.", "error");
+          clientNameInput?.focus();
+          return;
+        }
+
+        setBookingStatus("Submitting your request...", "");
+        if (submitButton) {
+          submitButton.disabled = true;
+        }
+
+        const payload = {
+          concept_id: conceptId,
+          expert_id: expertId,
+          start_time: startDate.toISOString(),
+          duration_minutes: Math.round(duration),
+          client_name: clientName,
+          group_size: Math.max(1, Number(groupSizeInput?.value) || 1),
+        };
+
         try {
           const response = await fetch(`${API_BASE}/bookings`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
           });
+
           if (!response.ok) {
-            throw new Error(`Status ${response.status}`);
+            let detail = "We couldn't submit your booking right now. Please retry soon.";
+            try {
+              const errorBody = await response.json();
+              detail = errorBody?.detail || detail;
+            } catch (parseError) {
+              // ignore parse errors and use fallback message
+            }
+            throw new Error(detail);
           }
+
           const data = await response.json();
-          bookingStatus.textContent = data.message || "Booking received! Our team will be in touch shortly.";
-          bookingStatus.style.color = "#a7f3d0";
+          const confirmation = data?.confirmation;
+          if (!confirmation) {
+            throw new Error("The platform did not return a confirmation payload, please try again.");
+          }
+
+          const startLabel = new Date(confirmation.start_time).toLocaleString();
+          setBookingStatus(
+            `Booking confirmed with ${confirmation.expert.name} on ${startLabel}. Reference ID: ${confirmation.booking_id}.`,
+            "success"
+          );
           bookingForm.reset();
+          populateConceptOptions();
+          updateExpertOptions("");
         } catch (error) {
-          bookingStatus.textContent = "We couldn't submit your booking right now. Please retry soon.";
-          bookingStatus.style.color = "#fca5a5";
+          setBookingStatus(error.message || "We couldn't submit your booking right now. Please retry soon.", "error");
           console.error(error);
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+          }
         }
       });
 
