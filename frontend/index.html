@@ -3,24 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luminary Nexus | Intelligent Mastery On-Demand</title>
+    <title>Economics Learning Portal</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap");
-
       :root {
-        color-scheme: light;
-        --slate-900: #0f172a;
-        --slate-800: #1e293b;
-        --slate-700: #334155;
-        --slate-500: #64748b;
-        --slate-300: #cbd5f5;
-        --slate-100: #eef2ff;
-        --primary-500: #6750f5;
-        --primary-600: #4f46e5;
-        --primary-700: #4338ca;
-        --accent: #f6c344;
-        --surface: rgba(15, 23, 42, 0.65);
-        --radius-xl: 26px;
+        color-scheme: light dark;
+        --primary: #23458f;
+        --accent: #f4b400;
+        --background: #f7f8fc;
+        --surface: #ffffff;
+        --text: #1f2430;
+        --muted: #5f6c7b;
       }
 
       * {
@@ -29,29 +21,21 @@
 
       body {
         margin: 0;
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        color: var(--slate-100);
-        background: radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.28), transparent 45%),
-          radial-gradient(circle at 80% 0%, rgba(214, 189, 73, 0.25), transparent 40%),
-          linear-gradient(135deg, #0b1023, #121b37 55%, #101629);
-        min-height: 100vh;
-      }
-
-      ::selection {
-        background: rgba(246, 195, 68, 0.4);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: var(--background);
+        color: var(--text);
       }
 
       header {
+        background: var(--surface);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         position: sticky;
         top: 0;
-        z-index: 1000;
-        backdrop-filter: blur(18px);
-        background: rgba(11, 16, 35, 0.8);
-        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+        z-index: 100;
       }
 
       .container {
-        width: min(1200px, 100%);
+        max-width: 1100px;
         margin: 0 auto;
         padding: 0 1.5rem;
       }
@@ -61,583 +45,226 @@
         align-items: center;
         justify-content: space-between;
         padding: 1rem 0;
-        gap: 1rem;
       }
 
       .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .logo-mark {
-        width: 42px;
-        height: 42px;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, var(--primary-600), var(--accent));
-        border-radius: 14px;
-        font-family: "Playfair Display", serif;
+        font-weight: 700;
         font-size: 1.15rem;
-        font-weight: 600;
-        color: #0b1023;
-        letter-spacing: 0.02em;
-      }
-
-      .logo span {
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-size: 0.92rem;
-        color: var(--slate-300);
+        color: var(--primary);
+        text-decoration: none;
       }
 
       .nav-links {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 1rem;
       }
 
       .nav-links button {
-        background: rgba(79, 70, 229, 0.08);
-        border: 1px solid transparent;
-        color: var(--slate-300);
-        padding: 0.55rem 1.2rem;
-        border-radius: 999px;
+        background: none;
+        border: none;
         font: inherit;
-        font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s ease;
+        color: var(--muted);
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        transition: background 0.2s ease, color 0.2s ease;
       }
 
-      .nav-links button:hover {
-        border-color: rgba(246, 195, 68, 0.4);
-        color: #fff;
-      }
-
+      .nav-links button:hover,
       .nav-links button.active {
-        background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
-        color: #fff;
-        border-color: rgba(103, 80, 245, 0.3);
-        box-shadow: 0 14px 24px rgba(79, 70, 229, 0.25);
+        background: rgba(35, 69, 143, 0.1);
+        color: var(--primary);
       }
 
       main {
-        padding: 3.5rem 0 5rem;
+        padding: 2.5rem 0 4rem;
       }
 
       section {
         display: none;
+        gap: 1.5rem;
       }
 
       section.active {
-        display: block;
-      }
-
-      .section-header {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 2.25rem;
-      }
-
-      .section-header h2 {
-        font-size: clamp(2rem, 1.8rem + 1vw, 2.8rem);
-        margin: 0;
-        font-family: "Playfair Display", serif;
-        color: #fff;
-      }
-
-      .section-header p {
-        max-width: 720px;
-        margin: 0;
-        color: var(--slate-300);
-        font-size: 1.05rem;
-        line-height: 1.8;
       }
 
       .hero {
-        position: relative;
-        background: linear-gradient(135deg, rgba(79, 70, 229, 0.9), rgba(103, 80, 245, 0.65));
-        border-radius: var(--radius-xl);
-        padding: clamp(2.5rem, 5vw, 4rem);
-        overflow: hidden;
-        box-shadow: 0 32px 65px rgba(79, 70, 229, 0.28);
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: -40% 40% 20% -30%;
-        background: radial-gradient(circle, rgba(246, 195, 68, 0.35), transparent 62%);
-        opacity: 0.75;
-        pointer-events: none;
-      }
-
-      .hero-content {
-        position: relative;
         display: grid;
-        gap: 2.25rem;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
         align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        background: linear-gradient(135deg, rgba(35, 69, 143, 0.85), rgba(22, 53, 110, 0.9));
+        padding: 2.75rem 2.25rem;
+        border-radius: 18px;
+        color: #fff;
+        box-shadow: 0 20px 40px rgba(35, 69, 143, 0.2);
       }
 
       .hero h1 {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(2.75rem, 2.4rem + 2vw, 4rem);
-        line-height: 1.1;
         margin: 0;
-        color: #fff;
+        font-size: clamp(2rem, 3vw + 1rem, 3rem);
       }
 
       .hero p {
-        margin: 1.2rem 0 2rem;
-        font-size: 1.15rem;
-        line-height: 1.85;
-        color: rgba(255, 255, 255, 0.85);
-      }
-
-      .cta-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .cta-primary,
-      .cta-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.55rem;
-        padding: 0.85rem 1.6rem;
-        border-radius: 999px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        border: 1px solid transparent;
-      }
-
-      .cta-primary {
-        background: #fff;
-        color: var(--primary-700);
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.16);
-      }
-
-      .cta-secondary {
-        background: transparent;
-        border-color: rgba(255, 255, 255, 0.4);
-        color: #fff;
-      }
-
-      .cta-primary:hover,
-      .cta-secondary:hover {
-        transform: translateY(-2px);
-      }
-
-      .hero-stats {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      }
-
-      .stat-card {
-        background: rgba(15, 23, 42, 0.4);
-        border-radius: 20px;
-        padding: 1.35rem;
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(148, 163, 184, 0.18);
-      }
-
-      .stat-card h3 {
-        margin: 0;
-        font-size: 2rem;
-        color: #fff;
-      }
-
-      .stat-card p {
-        margin: 0.4rem 0 0;
-        color: rgba(226, 232, 240, 0.75);
-      }
-
-      .value-grid {
-        margin-top: 3.5rem;
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-
-      .value-card {
-        background: rgba(148, 163, 184, 0.08);
-        border-radius: 20px;
-        padding: 1.6rem;
-        border: 1px solid rgba(148, 163, 184, 0.12);
-      }
-
-      .value-card h3 {
-        margin: 0;
-        color: #fff;
-        font-size: 1.2rem;
-      }
-
-      .value-card p {
-        margin: 0.8rem 0 0;
-        color: var(--slate-300);
+        margin: 0.75rem 0 1.5rem;
+        font-size: 1.05rem;
         line-height: 1.7;
       }
 
-      .badge {
+      .cta-button {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: rgba(103, 80, 245, 0.15);
-        border: 1px solid rgba(103, 80, 245, 0.25);
-        color: var(--slate-100);
-        padding: 0.35rem 0.9rem;
+        background: var(--accent);
+        color: #1c1c1c;
+        padding: 0.7rem 1.4rem;
         border-radius: 999px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin: 0;
+        color: var(--primary);
       }
 
       .grid {
         display: grid;
-        gap: 1.8rem;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
 
-      .discipline-card {
-        background: rgba(15, 23, 42, 0.6);
-        border-radius: 24px;
-        padding: 2rem;
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        display: grid;
-        gap: 1.4rem;
-      }
-
-      .discipline-card h3 {
-        margin: 0;
-        font-size: 1.6rem;
-        color: #fff;
-        font-family: "Playfair Display", serif;
-      }
-
-      .discipline-meta {
+      .card {
+        background: var(--surface);
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 16px 30px rgba(20, 33, 61, 0.08);
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem 1rem;
-        color: var(--slate-300);
-        font-size: 0.95rem;
+        flex-direction: column;
+        gap: 0.85rem;
       }
 
-      .discipline-principles {
-        display: grid;
-        gap: 0.75rem;
+      .card h3 {
+        margin: 0;
+        color: var(--text);
       }
 
-      .discipline-principles li {
-        list-style: none;
-        background: rgba(79, 70, 229, 0.12);
-        border-left: 3px solid rgba(246, 195, 68, 0.8);
-        padding: 0.75rem 1rem;
-        border-radius: 14px;
-        color: var(--slate-100);
+      .card p {
+        margin: 0;
+        color: var(--muted);
         line-height: 1.6;
       }
 
-      .discipline-support {
-        display: grid;
-        gap: 0.75rem;
-        background: rgba(15, 23, 42, 0.55);
-        border-radius: 18px;
-        padding: 1.2rem 1.5rem;
-        border: 1px solid rgba(103, 80, 245, 0.2);
-      }
-
-      .pill-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.65rem;
-        margin-bottom: 1.5rem;
-      }
-
       .pill {
-        padding: 0.55rem 1.1rem;
-        border-radius: 999px;
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        background: rgba(15, 23, 42, 0.4);
-        color: var(--slate-300);
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .pill.active {
-        background: rgba(103, 80, 245, 0.25);
-        border-color: rgba(103, 80, 245, 0.45);
-        color: #fff;
-        box-shadow: 0 12px 24px rgba(79, 70, 229, 0.18);
-      }
-
-      .expert-list {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-
-      .expert-card {
-        background: rgba(15, 23, 42, 0.58);
-        border-radius: 18px;
-        padding: 1.3rem;
-        border: 1px solid rgba(148, 163, 184, 0.16);
-        display: grid;
-        gap: 0.65rem;
-      }
-
-      .expert-card h4 {
-        margin: 0;
-        color: #fff;
-        font-size: 1.15rem;
-      }
-
-      .expert-card p {
-        margin: 0;
-        color: var(--slate-300);
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-
-      .focus-tag {
         display: inline-flex;
-        align-items: center;
-        padding: 0.3rem 0.65rem;
+        padding: 0.3rem 0.8rem;
         border-radius: 999px;
-        background: rgba(246, 195, 68, 0.22);
-        color: #fef3c7;
-        font-size: 0.8rem;
-        font-weight: 600;
-        width: fit-content;
-      }
-
-      .api-card {
-        margin-top: 2.75rem;
-        background: rgba(148, 163, 184, 0.08);
-        border-radius: 22px;
-        padding: 2rem;
-        border: 1px solid rgba(148, 163, 184, 0.15);
-      }
-
-      .api-card h3 {
-        margin: 0 0 1.2rem;
-        color: #fff;
-        font-family: "Playfair Display", serif;
-      }
-
-      .api-grid {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-
-      .api-item {
-        background: rgba(15, 23, 42, 0.55);
-        border: 1px solid rgba(103, 80, 245, 0.2);
-        border-radius: 16px;
-        padding: 1.1rem 1.3rem;
-      }
-
-      .api-item h4 {
-        margin: 0 0 0.65rem;
-        color: #fff;
-        font-size: 1.05rem;
-      }
-
-      .api-item p {
-        margin: 0;
-        color: var(--slate-300);
-        line-height: 1.5;
-      }
-
-      .module-list {
-        display: grid;
-        gap: 0.65rem;
-        margin-top: 1rem;
-      }
-
-      .module-item {
-        background: rgba(79, 70, 229, 0.14);
-        border-radius: 14px;
-        padding: 0.75rem 0.9rem;
-        border: 1px solid rgba(103, 80, 245, 0.18);
-      }
-
-      .module-item strong {
-        display: block;
-        color: #fff;
-        margin-bottom: 0.35rem;
-        font-size: 0.95rem;
-      }
-
-      .module-item span {
+        background: rgba(35, 69, 143, 0.12);
+        color: var(--primary);
         font-size: 0.85rem;
-        color: rgba(226, 232, 240, 0.75);
+        font-weight: 600;
+        text-transform: capitalize;
       }
 
-      .availability-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 0.75rem;
-      }
-
-      .availability-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        background: rgba(246, 195, 68, 0.2);
-        color: #fde68a;
-        padding: 0.35rem 0.7rem;
-        border-radius: 999px;
-        font-size: 0.8rem;
-      }
-
-      .pill-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.45rem;
-        margin: 0.75rem 0;
-      }
-
-      .status-message {
+      ul.clean {
         margin: 0;
-        color: var(--slate-300);
-        font-style: italic;
+        padding-left: 1.2rem;
+        color: var(--muted);
+        line-height: 1.5;
       }
 
       .form-card {
-        background: rgba(15, 23, 42, 0.55);
-        border-radius: 24px;
-        border: 1px solid rgba(103, 80, 245, 0.25);
-        padding: clamp(1.75rem, 4vw, 2.75rem);
-        display: grid;
-        gap: 1.5rem;
-      }
-
-      form {
+        background: var(--surface);
+        padding: 2rem;
+        border-radius: 18px;
+        box-shadow: 0 16px 30px rgba(20, 33, 61, 0.08);
         display: grid;
         gap: 1.25rem;
       }
 
-      .form-columns {
+      form {
         display: grid;
         gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
       label {
-        font-weight: 600;
-        color: #fff;
-        font-size: 0.95rem;
         display: grid;
-        gap: 0.35rem;
+        gap: 0.4rem;
+        font-weight: 600;
+        color: var(--text);
       }
 
       input,
       select,
       textarea {
         width: 100%;
-        padding: 0.75rem 1rem;
-        border-radius: 14px;
-        border: 1px solid rgba(148, 163, 184, 0.25);
-        background: rgba(15, 23, 42, 0.65);
-        color: #fff;
+        padding: 0.65rem 0.75rem;
+        border-radius: 12px;
+        border: 1px solid rgba(35, 69, 143, 0.25);
+        background: #fff;
         font: inherit;
+        color: var(--text);
         transition: border 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      textarea {
-        min-height: 120px;
       }
 
       input:focus,
       select:focus,
       textarea:focus {
-        outline: 2px solid rgba(103, 80, 245, 0.55);
-        outline-offset: 2px;
-        border-color: rgba(103, 80, 245, 0.45);
-        box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.18);
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(35, 69, 143, 0.2);
       }
 
       button[type="submit"] {
-        background: linear-gradient(135deg, var(--accent), #ffd66b);
-        color: #0b1023;
+        background: var(--primary);
+        color: #fff;
+        padding: 0.85rem 1.2rem;
         border: none;
-        font-weight: 700;
-        padding: 0.9rem 1.6rem;
-        border-radius: 999px;
+        border-radius: 12px;
+        font-weight: 600;
         cursor: pointer;
-        box-shadow: 0 18px 28px rgba(246, 195, 68, 0.25);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
       button[type="submit"]:hover {
         transform: translateY(-1px);
-        box-shadow: 0 22px 36px rgba(246, 195, 68, 0.32);
+        box-shadow: 0 14px 24px rgba(35, 69, 143, 0.18);
       }
 
-      .form-note {
-        color: var(--slate-300);
-        margin: 0;
+      .status {
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        font-weight: 600;
       }
 
-      .form-note.success {
-        color: #a7f3d0;
+      .status.success {
+        background: rgba(46, 204, 113, 0.15);
+        color: #1e824c;
       }
 
-      .form-note.error {
-        color: #fca5a5;
-      }
-
-      .input-hint {
-        font-size: 0.8rem;
-        color: rgba(226, 232, 240, 0.6);
+      .status.error {
+        background: rgba(231, 76, 60, 0.18);
+        color: #a94442;
       }
 
       footer {
-        border-top: 1px solid rgba(148, 163, 184, 0.12);
-        background: rgba(11, 16, 35, 0.75);
-        padding: 2.25rem 0;
-        margin-top: 4rem;
+        padding: 2rem 0;
+        text-align: center;
+        color: var(--muted);
       }
 
-      footer p {
-        margin: 0;
-        color: var(--slate-500);
-        font-size: 0.9rem;
-      }
-
-      @media (max-width: 768px) {
+      @media (max-width: 640px) {
         nav {
           flex-direction: column;
+          gap: 1rem;
           align-items: flex-start;
         }
 
-        .hero-content {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-stats {
-          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        }
-      }
-
-      @media (max-width: 480px) {
-        .container {
-          padding: 0 1rem;
-        }
-
         .nav-links {
-          justify-content: flex-start;
+          flex-wrap: wrap;
         }
       }
     </style>
@@ -646,909 +273,419 @@
     <header>
       <div class="container">
         <nav>
-          <a href="#home" class="logo" data-nav="home">
-            <div class="logo-mark">LN</div>
-            <span>Luminary Nexus</span>
-          </a>
+          <a class="logo" href="#" data-section="home">EcoLearn Portal</a>
           <div class="nav-links">
-            <button class="active" data-target="home">Home</button>
-            <button data-target="disciplines">Disciplines</button>
-            <button data-target="experts">Experts</button>
-            <button data-target="concepts">Concepts</button>
-            <button data-target="booking">Booking</button>
+            <button class="active" data-section="home">Home</button>
+            <button data-section="concepts">Concepts</button>
+            <button data-section="experts">Experts</button>
+            <button data-section="booking">Book a Session</button>
           </div>
         </nav>
       </div>
     </header>
-    <main>
+
+    <main class="container">
       <section id="home" class="active">
-        <div class="container">
-          <div class="hero">
-            <div class="hero-content">
-              <div>
-                <span class="badge">Next-generation post-secondary disruptor</span>
-                <h1>AI-crafted mastery fused with on-demand human brilliance.</h1>
-                <p>
-                  Luminary Nexus orchestrates precision learning journeys that blend adaptive AI tutoring with live sessions led by luminaries across every major discipline. Navigate from foundational theory to breakthrough application through curated studios, immersive labs, and immediate access to the world's leading experts.
-                </p>
-                <div class="cta-group">
-                  <a class="cta-primary" data-target="booking" href="#booking">Plan a session</a>
-                  <a class="cta-secondary" data-target="disciplines" href="#disciplines">Explore disciplines</a>
-                </div>
-              </div>
-              <div class="hero-stats">
-                <div class="stat-card">
-                  <h3>40+</h3>
-                  <p>fundamental learning pathways spanning the sciences, arts, and professional practice</p>
-                </div>
-                <div class="stat-card">
-                  <h3>120</h3>
-                  <p>global experts on call for live masterclasses, design reviews, and policy briefings</p>
-                </div>
-                <div class="stat-card">
-                  <h3>&lt;24h</h3>
-                  <p>from booking to curated AI prep kit and human expert session</p>
-                </div>
-              </div>
-            </div>
-            <div class="value-grid">
-              <div class="value-card">
-                <h3>AI Intellitutor</h3>
-                <p>Adaptive AI mentors align learning to your goals, synthesize research, and rehearse scenarios before every human-led deep dive.</p>
-              </div>
-              <div class="value-card">
-                <h3>Expert Pulse</h3>
-                <p>Live availability across academia, industry, and government ensures each sprint includes the precise voice you need.</p>
-              </div>
-              <div class="value-card">
-                <h3>Outcomes Studio</h3>
-                <p>Assessment-backed deliverables capture mastery — from prototypes to policy memos — with instant feedback loops.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="disciplines">
-        <div class="container">
-          <div class="section-header">
-            <span class="badge">Fundamental frameworks</span>
-            <h2>Focused learning in every major discipline.</h2>
+        <div class="hero">
+          <div>
+            <h1>Guided economics journeys for teams and leaders</h1>
             <p>
-              Each discipline blueprint weaves cornerstone principles, AI-accelerated practice, and guided sessions with top-tier practitioners. Learners progress from conceptual fluency to portfolio-ready execution without sacrificing depth or rigor.
+              Explore interactive concept breakdowns, connect with vetted industry experts,
+              and schedule bespoke learning sessions that translate economic theory into
+              action for your organisation.
             </p>
+            <a class="cta-button" data-section="booking" href="#booking">Book a session →</a>
           </div>
-          <div id="disciplineGrid" class="grid discipline-grid"></div>
-        </div>
-      </section>
-
-      <section id="experts">
-        <div class="container">
-          <div class="section-header">
-            <span class="badge">Global faculty collective</span>
-            <h2>120 on-demand experts bridging research and real-world impact.</h2>
-            <p>
-              Tap into a curated roster spanning universities, labs, startups, think tanks, and public sector innovation teams. Filter by discipline to preview the guidance lineup standing behind every Luminary Nexus pathway.
-            </p>
-          </div>
-          <div class="pill-group" id="expertFilters"></div>
-          <div id="expertList" class="expert-list"></div>
-
-          <div class="api-card">
-            <h3>Live Expert Availability</h3>
-            <p class="status-message" id="expertsStatus">Loading experts from the live platform...</p>
-            <div id="liveExperts" class="api-grid"></div>
+          <div>
+            <ul class="clean">
+              <li>Curated learning modules with applied case studies.</li>
+              <li>Experts experienced in policy, academia, and industry strategy.</li>
+              <li>Flexible bookings with transparent pricing and group options.</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <section id="concepts">
-        <div class="container">
-          <div class="section-header">
-            <span class="badge">Live curriculum intelligence</span>
-            <h2>Dynamic concept library from the Luminary Nexus API.</h2>
-            <p>
-              Our backend continuously evolves with new foundational concepts and learning artifacts. Explore the current catalog sourced directly from the platform's FastAPI service.
-            </p>
-          </div>
-          <div class="api-card">
-            <h3>Learning Concepts</h3>
-            <p class="status-message" id="conceptsStatus">Loading concepts from the live platform...</p>
-            <div id="conceptGrid" class="api-grid"></div>
-          </div>
+        <div class="section-heading">
+          <h2>Concept Library</h2>
+          <p class="muted">
+            Browse foundational economic ideas and dive into structured learning modules
+            built for professionals.
+          </p>
         </div>
+        <div id="concept-list" class="grid" aria-live="polite"></div>
+      </section>
+
+      <section id="experts">
+        <div class="section-heading">
+          <h2>Meet the Experts</h2>
+          <p class="muted">
+            Seasoned practitioners ready to guide you through complex scenarios and
+            tailored workshops.
+          </p>
+        </div>
+        <div id="expert-list" class="grid" aria-live="polite"></div>
       </section>
 
       <section id="booking">
-        <div class="container">
-          <div class="section-header">
-            <span class="badge">Curate your experience</span>
-            <h2>Reserve a personalized studio intensive.</h2>
-            <p>
-              Answer a few prompts and our AI orchestrator will assemble pre-work, resources, and expert pairings. You’ll receive a confirmation with next steps within one business day.
-            </p>
-          </div>
-          <div class="form-card">
-            <form id="bookingForm">
-              <div class="form-columns">
-                <div>
-                  <label for="bookingConcept">
-                    Learning focus
-                    <select id="bookingConcept" required>
-                      <option value="">Loading live concepts...</option>
-                    </select>
-                  </label>
-                  <span class="input-hint">Pulled from the Luminary Nexus API curriculum.</span>
-                </div>
-                <div>
-                  <label for="bookingExpert">
-                    Expert partner
-                    <select id="bookingExpert" required disabled>
-                      <option value="">Select a focus first</option>
-                    </select>
-                  </label>
-                  <span class="input-hint">Filtered automatically to the selected learning focus.</span>
-                </div>
-              </div>
-              <div class="form-columns">
-                <div>
-                  <label for="sessionStart">
-                    Preferred start time
-                    <input type="datetime-local" id="sessionStart" required />
-                  </label>
-                </div>
-                <div>
-                  <label for="sessionDuration">
-                    Session duration (minutes)
-                    <input type="number" id="sessionDuration" min="30" step="15" value="60" required />
-                  </label>
-                </div>
-                <div>
-                  <label for="groupSize">
-                    Group size
-                    <input type="number" id="groupSize" min="1" max="20" value="1" />
-                  </label>
-                </div>
-              </div>
-              <div>
-                <label for="name">
-                  Primary contact
-                  <input type="text" id="name" placeholder="Jordan Rivera" required />
-                </label>
-              </div>
-              <div>
-                <label for="email">
-                  Contact email
-                  <input type="email" id="email" placeholder="jordan@studio.io" required />
-                </label>
-              </div>
-              <div>
-                <label for="discipline">
-                  Strategic discipline
-                  <select id="discipline" required>
-                    <option value="">Select a focus area</option>
-                  </select>
-                </label>
-              </div>
-              <div>
-                <label for="goal">
-                  What outcome are you pursuing?
-                  <textarea id="goal" placeholder="Prototype a climate resilient urban planning solution..." required></textarea>
-                </label>
-              </div>
-              <div>
-                <label for="timeline">
-                  Desired timeline
-                  <input type="text" id="timeline" placeholder="2-week sprint" />
-                </label>
-              </div>
-              <button type="submit">Submit booking request</button>
-            </form>
-            <p id="bookingStatus" class="form-note" role="status"></p>
-          </div>
+        <div class="section-heading">
+          <h2>Book a tailored session</h2>
+          <p class="muted">
+            Choose your focus area, pick an expert, and request a time that suits your
+            team. We'll confirm availability instantly.
+          </p>
+        </div>
+        <div class="form-card">
+          <form id="booking-form">
+            <label>
+              Focus concept
+              <select id="concept-select" name="concept_id" required>
+                <option value="" disabled selected>Select a concept</option>
+              </select>
+            </label>
+            <label>
+              Expert
+              <select id="expert-select" name="expert_id" required>
+                <option value="" disabled selected>Select an expert</option>
+              </select>
+            </label>
+            <label>
+              Preferred start time
+              <input
+                type="datetime-local"
+                id="start-time"
+                name="start_time"
+                required
+              />
+            </label>
+            <label>
+              Session duration (minutes)
+              <input
+                type="number"
+                id="duration"
+                name="duration_minutes"
+                min="30"
+                step="15"
+                value="60"
+                required
+              />
+            </label>
+            <label>
+              Your name
+              <input type="text" id="client-name" name="client_name" required />
+            </label>
+            <label>
+              Group size
+              <input
+                type="number"
+                id="group-size"
+                name="group_size"
+                min="1"
+                max="20"
+                value="1"
+              />
+            </label>
+            <button type="submit">Submit booking request</button>
+          </form>
+          <div id="booking-status" aria-live="polite"></div>
         </div>
       </section>
     </main>
+
     <footer>
       <div class="container">
-        <p>© <span id="year"></span> Luminary Nexus. Intelligent mastery delivered with human insight.</p>
+        © <span id="year"></span> Economics Learning Portal. Powered by FastAPI.
       </div>
     </footer>
 
     <script>
       const API_BASE = "https://savage-incantation-x5gqqrrjrrqfpqp7-8000.app.github.dev";
       const sections = document.querySelectorAll("main section");
-      const navButtons = document.querySelectorAll(".nav-links button, .cta-group a");
-      const bookingForm = document.getElementById("bookingForm");
-      const bookingStatus = document.getElementById("bookingStatus");
-      const submitButton = bookingForm?.querySelector("button[type='submit']");
-      const conceptSelect = document.getElementById("bookingConcept");
-      const expertSelect = document.getElementById("bookingExpert");
-      const sessionStartInput = document.getElementById("sessionStart");
-      const sessionDurationInput = document.getElementById("sessionDuration");
-      const groupSizeInput = document.getElementById("groupSize");
+      const navButtons = document.querySelectorAll("[data-section]");
+      const conceptList = document.getElementById("concept-list");
+      const expertList = document.getElementById("expert-list");
+      const bookingForm = document.getElementById("booking-form");
+      const conceptSelect = document.getElementById("concept-select");
+      const expertSelect = document.getElementById("expert-select");
+      const bookingStatus = document.getElementById("booking-status");
 
-      let liveConcepts = [];
-      let liveExperts = [];
+      let conceptsCache = [];
+      let expertsCache = [];
 
-      function activateSection(targetId) {
-        sections.forEach((section) => {
-          section.classList.toggle("active", section.id === targetId);
-        });
-        document
-          .querySelectorAll(".nav-links button")
-          .forEach((btn) => btn.classList.toggle("active", btn.dataset.target === targetId));
-        const sectionElement = document.getElementById(targetId);
-        if (sectionElement) {
-          sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      const setYear = () => {
+        const yearEl = document.getElementById("year");
+        if (yearEl) {
+          yearEl.textContent = new Date().getFullYear();
         }
-      }
+      };
 
-      navButtons.forEach((btn) => {
-        btn.addEventListener("click", (event) => {
-          const target = event.currentTarget.dataset.target;
-          if (target) {
-            event.preventDefault();
-            activateSection(target);
+      const setActiveSection = (sectionId) => {
+        sections.forEach((section) => {
+          section.classList.toggle("active", section.id === sectionId);
+        });
+        navButtons.forEach((button) => {
+          if (button.tagName === "BUTTON") {
+            button.classList.toggle("active", button.dataset.section === sectionId);
           }
         });
-      });
+      };
 
-      const disciplinesData = [
-        {
-          field: "Engineering & Advanced Manufacturing",
-          focus: "Build the systems powering sustainable infrastructure, aerospace, and autonomous mobility.",
-          principles: [
-            "Systems thinking and lifecycle design anchor every solution in reliability and resilience.",
-            "Materials intelligence pairs advanced composites with sustainability benchmarks.",
-            "Model-based engineering and digital twins de-risk high-stakes deployments.",
-            "Automation and robotics amplify precision while honoring human-centered safety design.",
-            "Continuous improvement loops connect factory floors with executive strategy rooms.",
-          ],
-          aiSupport: "Generative design copilots, simulation clusters, and predictive maintenance diagnostics adapt to each build brief.",
-          humanSupport: "Masterclasses with NASA, MIT, and Siemens veterans guide design reviews, compliance audits, and go-to-market readiness.",
-        },
-        {
-          field: "Computer Science & Artificial Intelligence",
-          focus: "Architect responsible, scalable, and human-aligned digital intelligence.",
-          principles: [
-            "Algorithmic foundations emphasize complexity, optimization, and explainability.",
-            "Data-centric development enforces governance, lineage, and continual quality loops.",
-            "Responsible AI frameworks embed fairness, transparency, and safety cases by design.",
-            "Cloud-to-edge infrastructure patterns deliver elastic, resilient deployment.",
-            "Human-computer collaboration explores prompt design, co-creation, and augmented decisioning.",
-          ],
-          aiSupport: "Multimodal copilots generate scaffolding code, evaluate model risk, and narrate experiments as living design docs.",
-          humanSupport: "Strategists from Stanford, DeepMind, and DAIR lead critical reviews on ethics, scaling, and research translation.",
-        },
-        {
-          field: "Life Sciences & Medicine",
-          focus: "Advance precision health, biotechnology, and evidence-driven care models.",
-          principles: [
-            "Translational research bridges lab discovery with clinical application and regulatory pathways.",
-            "Precision medicine blends omics, imaging, and real-world data for individualized care.",
-            "Bioethics and safety frameworks protect patient trust and societal well-being.",
-            "Interdisciplinary collaboration synchronizes clinicians, data scientists, and policy stewards.",
-            "Regenerative innovation and digital therapeutics redefine preventative and restorative care.",
-          ],
-          aiSupport: "Computational pipelines surface biomarkers, simulate trials, and personalize patient education kits.",
-          humanSupport: "Clinical innovators from Mayo Clinic, WHO, and biotech scaleups host case conferences and translational labs.",
-        },
-        {
-          field: "Business, Economics & Policy",
-          focus: "Navigate markets, finance, and governance with data-rich intelligence.",
-          principles: [
-            "Market dynamics and behavioral economics predict demand, pricing, and adoption curves.",
-            "Fiscal strategy connects capital allocation with scenario planning and risk hedging.",
-            "Global governance and policy instruments translate into equitable, scalable reforms.",
-            "Impact measurement quantifies triple bottom line outcomes with auditable metrics.",
-            "Innovation economics maps incentives driving entrepreneurship, competition, and inclusion.",
-          ],
-          aiSupport: "Economic twins stress-test policies, forecast capital flows, and auto-generate board-ready insights.",
-          humanSupport: "Nobel laureates, central bankers, and startup operators deliver battle-tested playbooks in live salons.",
-        },
-        {
-          field: "Humanities & Social Sciences",
-          focus: "Interrogate culture, ethics, and society to shape empathetic innovation.",
-          principles: [
-            "Critical inquiry sharpens analytical reasoning across texts, media, and lived experience.",
-            "Cultural literacy equips leaders to design inclusive products and narratives.",
-            "Ethical leadership frameworks govern emergent technology and civic life.",
-            "Social systems analysis decodes institutions, power, and community impact.",
-            "Narrative power hones storytelling that mobilizes movements and organizations.",
-          ],
-          aiSupport: "Narrative intelligence engines synthesize sources, trace bias, and surface counterfactual perspectives.",
-          humanSupport: "Historians, sociologists, and cultural strategists facilitate salons, studio critiques, and policy roundtables.",
-        },
-        {
-          field: "Earth & Environmental Sciences",
-          focus: "Design climate resilience and regenerative stewardship at planetary scale.",
-          principles: [
-            "Climate systems modeling anticipates cascading risks across regions and industries.",
-            "Geospatial intelligence illuminates land use, biodiversity, and infrastructure exposure.",
-            "Sustainable resource management balances energy, water, and material transitions.",
-            "Environmental policy frameworks align incentives, compliance, and community equity.",
-            "Resilience planning orchestrates adaptation roadmaps and rapid response playbooks.",
-          ],
-          aiSupport: "Satellite analytics, scenario engines, and carbon accounting copilots tailor insights to each geography.",
-          humanSupport: "UN advisors, national lab scientists, and climate-tech founders host mission planning workshops.",
-        },
-      ];
+      const fetchJSON = async (endpoint) => {
+        const response = await fetch(`${API_BASE}${endpoint}`);
+        if (!response.ok) {
+          const detail = await response.text();
+          throw new Error(detail || `Request failed with status ${response.status}`);
+        }
+        return response.json();
+      };
 
-      const expertsByField = [
-        {
-          field: "Engineering & Advanced Manufacturing",
-          experts: [
-            { name: "Gwynne Shotwell", title: "President & COO", affiliation: "SpaceX", focus: "Reusable launch systems" },
-            { name: "Dr. Ayanna Howard", title: "Dean, College of Engineering", affiliation: "Ohio State University", focus: "Human-centered robotics" },
-            { name: "Prof. Ann Dowling", title: "Professor of Mechanical Engineering", affiliation: "University of Cambridge", focus: "Aeroacoustics" },
-            { name: "Kimberly Bryant", title: "Founder", affiliation: "Black Girls CODE", focus: "Inclusive engineering talent" },
-            { name: "Dr. Lisa Su", title: "Chair & CEO", affiliation: "AMD", focus: "High-performance computing" },
-            { name: "Mary Barra", title: "Chair & CEO", affiliation: "General Motors", focus: "Electrification strategy" },
-            { name: "Dr. Reshma Jagsi", title: "Director, Center for Bioethics", affiliation: "Emory University", focus: "Ethics in innovation" },
-            { name: "Yoshihiro Sawa", title: "President & CEO", affiliation: "Lexus International", focus: "Advanced manufacturing" },
-            { name: "Dr. Ellen Stofan", title: "Under Secretary for Science", affiliation: "Smithsonian Institution", focus: "Aerospace innovation" },
-            { name: "James Dyson", title: "Founder & Chief Engineer", affiliation: "Dyson", focus: "Design thinking" },
-            { name: "Dario Gil", title: "SVP & Director", affiliation: "IBM Research", focus: "Quantum manufacturing" },
-            { name: "Prof. Chiara Daraio", title: "Professor", affiliation: "Caltech", focus: "Materials intelligence" },
-            { name: "Dr. John Kelly", title: "Former Executive Vice President", affiliation: "IBM", focus: "Systems engineering" },
-            { name: "Wanda Austin", title: "CEO Emerita", affiliation: "The Aerospace Corporation", focus: "Mission assurance" },
-            { name: "Dr. Samir Mitragotri", title: "Professor", affiliation: "Harvard SEAS", focus: "Bio-inspired devices" },
-            { name: "Prof. Mark Cutkosky", title: "Professor", affiliation: "Stanford University", focus: "Robotic manipulation" },
-            { name: "Dr. Janet Kavandi", title: "President", affiliation: "Sierra Space", focus: "Orbital platforms" },
-            { name: "Marc Andreessen", title: "General Partner", affiliation: "a16z", focus: "Industrial innovation capital" },
-            { name: "Isabel Pedrazzini", title: "Chief Engineer", affiliation: "Siemens Smart Infrastructure", focus: "Grid modernization" },
-            { name: "Rajeev Ram", title: "Professor", affiliation: "MIT", focus: "Photonics manufacturing" },
-          ],
-        },
-        {
-          field: "Computer Science & Artificial Intelligence",
-          experts: [
-            { name: "Fei-Fei Li", title: "Co-Director, HAI", affiliation: "Stanford University", focus: "Human-centered AI" },
-            { name: "Demis Hassabis", title: "CEO", affiliation: "Google DeepMind", focus: "Frontier AI research" },
-            { name: "Andrew Ng", title: "Founder", affiliation: "DeepLearning.AI", focus: "Applied machine learning" },
-            { name: "Timnit Gebru", title: "Founder", affiliation: "DAIR Institute", focus: "AI ethics" },
-            { name: "Yoshua Bengio", title: "Scientific Director", affiliation: "Mila", focus: "Deep learning" },
-            { name: "Joy Buolamwini", title: "Founder", affiliation: "Algorithmic Justice League", focus: "Algorithmic accountability" },
-            { name: "Jeff Dean", title: "Chief Scientist", affiliation: "Google", focus: "Scalable systems" },
-            { name: "Daphne Koller", title: "Founder & CEO", affiliation: "Insitro", focus: "ML in biomedicine" },
-            { name: "Professor Shafi Goldwasser", title: "Director", affiliation: "Simons Institute", focus: "Cryptography" },
-            { name: "Prof. Ruha Benjamin", title: "Professor", affiliation: "Princeton University", focus: "Race & technology" },
-            { name: "Ian Goodfellow", title: "Director", affiliation: "Apple ML Research", focus: "Generative models" },
-            { name: "Sara Hooker", title: "Head of Cohere For AI", affiliation: "Cohere", focus: "Responsible model scaling" },
-            { name: "Dr. Kate Crawford", title: "Research Professor", affiliation: "USC Annenberg", focus: "AI & society" },
-            { name: "Prof. Zeynep Tufekci", title: "Professor", affiliation: "Columbia University", focus: "Digital democracy" },
-            { name: "Prof. Hany Farid", title: "Professor", affiliation: "UC Berkeley", focus: "Forensics & trust" },
-            { name: "Dr. Rumman Chowdhury", title: "CEO", affiliation: "Parity Consulting", focus: "Responsible AI ops" },
-            { name: "Jensen Huang", title: "Founder & CEO", affiliation: "NVIDIA", focus: "Accelerated computing" },
-            { name: "Prof. Jelani Nelson", title: "Professor", affiliation: "UC Berkeley", focus: "Algorithms" },
-            { name: "Prof. Cynthia Dwork", title: "Professor", affiliation: "Harvard University", focus: "Differential privacy" },
-            { name: "Dr. Pragya Misra", title: "Director", affiliation: "Meta Open Research", focus: "Responsible experimentation" },
-          ],
-        },
-        {
-          field: "Life Sciences & Medicine",
-          experts: [
-            { name: "Dr. Jennifer Doudna", title: "Professor", affiliation: "UC Berkeley", focus: "CRISPR gene editing" },
-            { name: "Dr. Anthony Fauci", title: "Distinguished Scholar", affiliation: "NIH", focus: "Immunology" },
-            { name: "Dr. Atul Gawande", title: "Chair", affiliation: "Ariadne Labs", focus: "Health systems" },
-            { name: "Dr. Kizzmekia Corbett", title: "Assistant Professor", affiliation: "Harvard T.H. Chan", focus: "Vaccinology" },
-            { name: "Dr. Siddhartha Mukherjee", title: "Physician-Scientist", affiliation: "Columbia University", focus: "Cancer biology" },
-            { name: "Dr. Soumya Swaminathan", title: "Former Chief Scientist", affiliation: "World Health Organization", focus: "Global health" },
-            { name: "Prof. Eric Topol", title: "Founder & Director", affiliation: "Scripps Research Translational Institute", focus: "Digital medicine" },
-            { name: "Prof. Frances Arnold", title: "Nobel Laureate", affiliation: "Caltech", focus: "Directed evolution" },
-            { name: "Dr. Pardis Sabeti", title: "Professor", affiliation: "Harvard University", focus: "Computational genomics" },
-            { name: "Dr. Mary-Claire King", title: "Professor", affiliation: "University of Washington", focus: "Genetics" },
-            { name: "Dr. Paul Farmer", title: "Co-Founder", affiliation: "Partners In Health", focus: "Global equity" },
-            { name: "Dr. Michelle McMurry-Heath", title: "CEO", affiliation: "Biotechnology Innovation Organization", focus: "Biotech policy" },
-            { name: "Dr. Özlem Türeci", title: "Co-Founder & CMO", affiliation: "BioNTech", focus: "mRNA therapeutics" },
-            { name: "Dr. Vivek Murthy", title: "U.S. Surgeon General", affiliation: "U.S. Department of Health and Human Services", focus: "Public health" },
-            { name: "Prof. George Church", title: "Professor", affiliation: "Harvard Medical School", focus: "Genomic engineering" },
-            { name: "Dr. Huda Zoghbi", title: "Director", affiliation: "Jan and Dan Duncan Neurological Research Institute", focus: "Neurogenetics" },
-            { name: "Dr. Devi Sridhar", title: "Chair of Global Public Health", affiliation: "University of Edinburgh", focus: "Global health governance" },
-            { name: "Dr. Noubar Afeyan", title: "Founder", affiliation: "Flagship Pioneering", focus: "Bioplatform innovation" },
-            { name: "Dr. Peter Hotez", title: "Dean", affiliation: "Baylor College of Medicine", focus: "Neglected diseases" },
-            { name: "Dr. Esther Choo", title: "Associate Professor", affiliation: "OHSU", focus: "Health equity" },
-          ],
-        },
-        {
-          field: "Business, Economics & Policy",
-          experts: [
-            { name: "Dr. Esther Duflo", title: "Professor", affiliation: "MIT", focus: "Development economics" },
-            { name: "Dr. Paul Romer", title: "University Professor", affiliation: "NYU", focus: "Innovation economics" },
-            { name: "Janet Yellen", title: "Secretary", affiliation: "U.S. Department of the Treasury", focus: "Macroeconomic policy" },
-            { name: "Ngozi Okonjo-Iweala", title: "Director-General", affiliation: "World Trade Organization", focus: "Trade diplomacy" },
-            { name: "Dr. Mariana Mazzucato", title: "Professor", affiliation: "University College London", focus: "Mission economy" },
-            { name: "Satya Nadella", title: "Chairman & CEO", affiliation: "Microsoft", focus: "Platform strategy" },
-            { name: "Christine Lagarde", title: "President", affiliation: "European Central Bank", focus: "Monetary policy" },
-            { name: "Dambisa Moyo", title: "Global Economist", affiliation: "Vereit", focus: "Capital markets" },
-            { name: "Dr. Lisa Cook", title: "Governor", affiliation: "Federal Reserve Board", focus: "Innovation finance" },
-            { name: "Andrew Liveris", title: "Chairman", affiliation: "Lucid Motors", focus: "Industrial policy" },
-            { name: "Prof. Michael Porter", title: "Professor", affiliation: "Harvard Business School", focus: "Competitive strategy" },
-            { name: "Prof. Laura Tyson", title: "Distinguished Professor", affiliation: "UC Berkeley", focus: "Global business" },
-            { name: "Indra Nooyi", title: "Former CEO", affiliation: "PepsiCo", focus: "Corporate transformation" },
-            { name: "Dr. Raj Chetty", title: "Professor", affiliation: "Harvard University", focus: "Opportunity insights" },
-            { name: "Mellody Hobson", title: "Co-CEO", affiliation: "Ariel Investments", focus: "Inclusive finance" },
-            { name: "Adena Friedman", title: "Chair & CEO", affiliation: "Nasdaq", focus: "Market infrastructure" },
-            { name: "Dr. Erik Brynjolfsson", title: "Director", affiliation: "Stanford Digital Economy Lab", focus: "Digital productivity" },
-            { name: "Sir Ronald Cohen", title: "Chair", affiliation: "Global Steering Group for Impact Investment", focus: "Impact capital" },
-            { name: "Cecilia Rouse", title: "President", affiliation: "Brookings Institution", focus: "Public policy" },
-            { name: "Reid Hoffman", title: "Co-Founder", affiliation: "LinkedIn", focus: "Entrepreneurship" },
-          ],
-        },
-        {
-          field: "Humanities & Social Sciences",
-          experts: [
-            { name: "Prof. Henry Louis Gates Jr.", title: "Director", affiliation: "Harvard University", focus: "African American studies" },
-            { name: "Dr. Imani Perry", title: "Professor", affiliation: "Harvard University", focus: "Cultural studies" },
-            { name: "Prof. Mary Beard", title: "Emeritus Professor", affiliation: "University of Cambridge", focus: "Classics" },
-            { name: "Dr. Cornel West", title: "Professor of Practice", affiliation: "Union Theological Seminary", focus: "Philosophy & justice" },
-            { name: "Prof. Homi Bhabha", title: "Professor", affiliation: "Harvard University", focus: "Critical theory" },
-            { name: "Dr. Sarah Lewis", title: "Founder", affiliation: "Vision & Justice", focus: "Visual culture" },
-            { name: "Prof. Rebecca Solnit", title: "Writer & Historian", affiliation: "Independent", focus: "Narrative change" },
-            { name: "Prof. Anne Applebaum", title: "Professor of Practice", affiliation: "Johns Hopkins SAIS", focus: "Democracy & disinformation" },
-            { name: "Dr. Ruha Benjamin", title: "Professor", affiliation: "Princeton University", focus: "Science, technology & race" },
-            { name: "Prof. Kwame Anthony Appiah", title: "Professor", affiliation: "NYU", focus: "Ethics" },
-            { name: "Prof. Saidiya Hartman", title: "University Professor", affiliation: "Columbia University", focus: "Narrative ethics" },
-            { name: "Dr. Kate Raworth", title: "Senior Associate", affiliation: "Oxford University", focus: "Doughnut economics" },
-            { name: "Dr. Neri Oxman", title: "Founder", affiliation: "Oxman Architects", focus: "Material ecology" },
-            { name: "Prof. Sheila Jasanoff", title: "Pforzheimer Professor", affiliation: "Harvard Kennedy School", focus: "Science & technology studies" },
-            { name: "Prof. David Adjaye", title: "Principal", affiliation: "Adjaye Associates", focus: "Architecture & civic space" },
-            { name: "Dr. Liza Donnelly", title: "Cartoonist & Cultural Commentator", affiliation: "The New Yorker", focus: "Visual storytelling" },
-            { name: "Prof. Kimberlé Crenshaw", title: "Professor", affiliation: "UCLA & Columbia Law", focus: "Critical race theory" },
-            { name: "Dr. Madeleine Albright", title: "Chair", affiliation: "Albright Stonebridge Group", focus: "Diplomacy" },
-            { name: "Prof. Sheila Johnson", title: "Vice Chair", affiliation: "Parsons School of Design", focus: "Creative leadership" },
-            { name: "Dr. Anne-Marie Slaughter", title: "CEO", affiliation: "New America", focus: "Civic innovation" },
-          ],
-        },
-        {
-          field: "Earth & Environmental Sciences",
-          experts: [
-            { name: "Dr. Katharine Hayhoe", title: "Chief Scientist", affiliation: "The Nature Conservancy", focus: "Climate modeling" },
-            { name: "Dr. Gavin Schmidt", title: "Director", affiliation: "NASA GISS", focus: "Climate projections" },
-            { name: "Dr. Leah Stokes", title: "Associate Professor", affiliation: "UC Santa Barbara", focus: "Energy policy" },
-            { name: "Dr. Ayana Elizabeth Johnson", title: "Co-Founder", affiliation: "Urban Ocean Lab", focus: "Blue economy" },
-            { name: "Dr. Susan Solomon", title: "Professor", affiliation: "MIT", focus: "Atmospheric chemistry" },
-            { name: "Dr. Michael Mann", title: "Presidential Distinguished Professor", affiliation: "University of Pennsylvania", focus: "Climate dynamics" },
-            { name: "Dr. Jane Lubchenco", title: "Deputy Director for Climate", affiliation: "White House OSTP", focus: "Ocean policy" },
-            { name: "Dr. Kate Marvel", title: "Senior Scientist", affiliation: "Project Drawdown", focus: "Climate communication" },
-            { name: "Dr. Johan Rockström", title: "Director", affiliation: "Potsdam Institute", focus: "Planetary boundaries" },
-            { name: "Dr. Ken Caldeira", title: "Senior Scientist", affiliation: "Carnegie Institution", focus: "Climate engineering" },
-            { name: "Dr. Elizabeth Kolbert", title: "Staff Writer", affiliation: "The New Yorker", focus: "Environmental journalism" },
-            { name: "Dr. Steven Chu", title: "Nobel Laureate & Professor", affiliation: "Stanford University", focus: "Energy systems" },
-            { name: "Dr. Sunita Narain", title: "Director General", affiliation: "Centre for Science and Environment", focus: "Environmental justice" },
-            { name: "Dr. Christiana Figueres", title: "Co-Founder", affiliation: "Global Optimism", focus: "Climate diplomacy" },
-            { name: "Dr. Katharine Wilkinson", title: "Executive Director", affiliation: "The All We Can Save Project", focus: "Climate leadership" },
-            { name: "Dr. Naomi Oreskes", title: "Professor", affiliation: "Harvard University", focus: "History of science" },
-            { name: "Dr. Saleemul Huq", title: "Director", affiliation: "ICCCAD", focus: "Adaptation finance" },
-            { name: "Dr. Ernest Moniz", title: "President & CEO", affiliation: "Energy Futures Initiative", focus: "Energy transition" },
-            { name: "Dr. Rupa Basu", title: "Chief", affiliation: "California EPA", focus: "Climate & health" },
-            { name: "Dr. Kate Brandt", title: "Chief Sustainability Officer", affiliation: "Google", focus: "Circular economy" },
-          ],
-        },
-      ];
+      const renderConcepts = (concepts) => {
+        conceptList.innerHTML = "";
+        if (!concepts.length) {
+          conceptList.innerHTML = "<p>No concepts available at the moment.</p>";
+          return;
+        }
 
-      const disciplineGrid = document.getElementById("disciplineGrid");
-      const disciplineSelect = document.getElementById("discipline");
-
-      disciplinesData.forEach((discipline) => {
-        const card = document.createElement("article");
-        card.className = "discipline-card";
-        card.innerHTML = `
-          <div>
-            <h3>${discipline.field}</h3>
-            <p class="discipline-meta">${discipline.focus}</p>
-          </div>
-          <div class="discipline-principles">
-            ${discipline.principles.map((principle) => `<li>${principle}</li>`).join("")}
-          </div>
-          <div class="discipline-support">
-            <p><strong>AI Intellitutor:</strong> ${discipline.aiSupport}</p>
-            <p><strong>Expert Pulse:</strong> ${discipline.humanSupport}</p>
-          </div>
-        `;
-        disciplineGrid.appendChild(card);
-
-        const option = document.createElement("option");
-        option.value = discipline.field;
-        option.textContent = discipline.field;
-        disciplineSelect.appendChild(option);
-      });
-
-      const expertFilters = document.getElementById("expertFilters");
-      const expertList = document.getElementById("expertList");
-
-      function renderExperts(field) {
-        const group = expertsByField.find((item) => item.field === field) || expertsByField[0];
-        expertList.innerHTML = group.experts
-          .map(
-            (expert) => `
-            <article class="expert-card">
-              <div class="focus-tag">${group.field}</div>
-              <h4>${expert.name}</h4>
-              <p>${expert.title}</p>
-              <p>${expert.affiliation}</p>
-              <p>${expert.focus}</p>
-            </article>
-          `
-          )
-          .join("");
-      }
-
-      expertsByField.forEach((group, index) => {
-        const pill = document.createElement("button");
-        pill.type = "button";
-        pill.className = `pill${index === 0 ? " active" : ""}`;
-        pill.textContent = group.field;
-        pill.dataset.field = group.field;
-        pill.addEventListener("click", () => {
-          document.querySelectorAll(".pill-group .pill").forEach((btn) => btn.classList.remove("active"));
-          pill.classList.add("active");
-          renderExperts(group.field);
+        concepts.forEach((concept) => {
+          const card = document.createElement("article");
+          card.className = "card";
+          card.innerHTML = `
+            <div class="pill">${concept.id.replace(/-/g, " ")}</div>
+            <h3>${concept.title}</h3>
+            <p>${concept.summary}</p>
+            <p><strong>Why it matters:</strong> ${concept.why_it_matters}</p>
+            ${concept.modules?.length ? `
+              <div>
+                <strong>Modules:</strong>
+                <ul class="clean">
+                  ${concept.modules
+                    .map(
+                      (module) => `
+                        <li>
+                          <span style="font-weight:600; color: var(--text);">${module.title}</span>
+                          <br />
+                          <span style="font-size:0.85rem; color: var(--muted);">${module.content_summary}</span>
+                        </li>
+                      `
+                    )
+                    .join("")}
+                </ul>
+              </div>
+            ` : ""}
+          `;
+          conceptList.appendChild(card);
         });
-        expertFilters.appendChild(pill);
-      });
+      };
 
-      renderExperts(expertsByField[0].field);
-
-      const conceptStatusEl = document.getElementById("conceptsStatus");
-      const conceptGrid = document.getElementById("conceptGrid");
-      const expertsStatusEl = document.getElementById("expertsStatus");
-      const liveExpertsGrid = document.getElementById("liveExperts");
-
-      function populateConceptOptions() {
-        if (!conceptSelect) {
-          return;
-        }
-        const previous = conceptSelect.value;
-        if (!liveConcepts.length) {
-          conceptSelect.innerHTML = '<option value="">No concepts available</option>';
-          conceptSelect.disabled = true;
-          return;
-        }
-        conceptSelect.disabled = false;
-        conceptSelect.innerHTML = ['<option value="">Select a learning focus</option>', ...liveConcepts.map((concept) => `<option value="${concept.id}">${concept.title}</option>`)].join("");
-        if (previous && liveConcepts.some((concept) => concept.id === previous)) {
-          conceptSelect.value = previous;
-        }
-      }
-
-      function updateExpertOptions(conceptId = "") {
-        if (!expertSelect) {
-          return;
-        }
-
-        if (!liveExperts.length) {
-          expertSelect.innerHTML = '<option value="">Experts loading...</option>';
-          expertSelect.disabled = true;
-          return;
-        }
-
-        if (!conceptId) {
-          expertSelect.innerHTML = '<option value="">Select a focus first</option>';
-          expertSelect.disabled = true;
-          return;
-        }
-
-        const relevantExperts = liveExperts.filter(
-          (expert) =>
-            Array.isArray(expert.focus_areas) &&
-            expert.focus_areas.some((area) => area.toLowerCase() === conceptId.toLowerCase())
-        );
-
-        if (!relevantExperts.length) {
-          expertSelect.innerHTML = '<option value="">No experts cover this focus yet</option>';
-          expertSelect.disabled = true;
-          return;
-        }
-
-        const previous = expertSelect.value;
-        expertSelect.disabled = false;
-        expertSelect.innerHTML = ['<option value="">Select an expert</option>', ...relevantExperts.map((expert) => `<option value="${expert.id}">${expert.name}</option>`)].join("");
-        if (previous && relevantExperts.some((expert) => expert.id === previous)) {
-          expertSelect.value = previous;
-        }
-      }
-
-      function titleCase(text = "") {
-        return text
-          .split(" ")
-          .filter(Boolean)
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
-      }
-
-      function formatCurrency(value) {
-        const amount = Number(value);
-        if (!Number.isFinite(amount)) {
-          return "On request";
-        }
-        return new Intl.NumberFormat(undefined, {
+      const formatCurrency = (value) =>
+        new Intl.NumberFormat(undefined, {
           style: "currency",
           currency: "USD",
           maximumFractionDigits: 0,
-        }).format(amount);
-      }
+        }).format(value);
 
-      function formatTimeValue(value) {
-        if (!value) {
-          return "";
-        }
+      const formatTime = (timeString) => {
         try {
-          if (typeof value === "string" && value.includes(":")) {
-            const [hour, minute] = value.split(":");
-            const date = new Date();
-            date.setHours(Number(hour), Number(minute));
-            return new Intl.DateTimeFormat(undefined, {
-              hour: "numeric",
-              minute: "2-digit",
-            }).format(date);
-          }
-          const date = new Date(value);
-          if (Number.isNaN(date.valueOf())) {
-            return String(value);
-          }
+          const [hour, minute] = timeString.split(":");
+          const date = new Date();
+          date.setHours(parseInt(hour, 10), parseInt(minute, 10));
           return new Intl.DateTimeFormat(undefined, {
             hour: "numeric",
             minute: "2-digit",
           }).format(date);
         } catch (error) {
-          return String(value);
+          return timeString;
         }
-      }
+      };
 
-      function formatAvailability(slot = {}) {
-        const weekday = titleCase(String(slot.weekday || "").replace(/-/g, " "));
-        const start = formatTimeValue(slot.start);
-        const end = formatTimeValue(slot.end);
-        const timeWindow = start && end ? `${start} – ${end}` : start || end;
-        return [weekday, timeWindow].filter(Boolean).join(" · ");
-      }
+      const titleCase = (text = "") =>
+        text
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
 
-      function renderModuleList(modules) {
-        if (!Array.isArray(modules) || !modules.length) {
-          return "";
+      const renderExperts = (experts) => {
+        expertList.innerHTML = "";
+        if (!experts.length) {
+          expertList.innerHTML = "<p>No experts available at the moment.</p>";
+          return;
         }
-        return `<div class="module-list">${modules
-          .map(
-            (module) => `
-              <div class="module-item">
-                <strong>${module.title}</strong>
-                <span>${module.content_summary}</span>
-              </div>
-            `
-          )
-          .join("")}</div>`;
-      }
 
-      function renderLiveExpert(expert) {
-        const focusAreas = Array.isArray(expert.focus_areas) && expert.focus_areas.length
-          ? `<div class="pill-row">${expert.focus_areas
-              .map((area) => `<span class="pill">${titleCase(area.replace(/-/g, " "))}</span>`)
-              .join("")}</div>`
-          : "";
+        experts.forEach((expert) => {
+          const card = document.createElement("article");
+          card.className = "card";
 
-        const availability = Array.isArray(expert.availability) && expert.availability.length
-          ? `<div class="availability-grid">${expert.availability
-              .map((slot) => `<span class="availability-chip">${formatAvailability(slot)}</span>`)
-              .join("")}</div>`
-          : "";
+          const availability = expert.availability
+            .map(
+              (slot) => `
+                <span class="pill" style="background: rgba(244, 180, 0, 0.15); color: #b8860b;">
+                  ${titleCase(String(slot.weekday).replace(/-/g, " "))}
+                  ${slot.start ? ` · ${formatTime(slot.start)}` : ""}
+                  ${slot.end ? ` - ${formatTime(slot.end)}` : ""}
+                </span>
+              `
+            )
+            .join(" ");
 
-        const discount = Number(expert.group_discount);
-        const groupRate = Number.isFinite(discount)
-          ? `<p><strong>Group sessions:</strong> ${discount === 1 ? "Same as solo pricing" : `${(discount * 100).toFixed(0)}% of solo pricing`}</p>`
-          : "";
+          const focusAreas = expert.focus_areas
+            .map((area) => `<span class="pill">${titleCase(area.replace(/-/g, " "))}</span>`)
+            .join(" ");
 
-        return `
-          <article class="api-item">
-            <h4>${expert.name}</h4>
-            <p>${expert.credentials || expert.title || "Subject-matter expert"}</p>
-            ${focusAreas}
+          card.innerHTML = `
+            <h3>${expert.name}</h3>
+            <p>${expert.credentials}</p>
+            <div>${focusAreas}</div>
             <p><strong>Rate:</strong> ${formatCurrency(expert.rate_per_hour)} / hour</p>
-            ${groupRate}
-            ${availability}
-          </article>
-        `;
-      }
+            <p><strong>Group discount:</strong> ${(expert.group_discount * 100).toFixed(0)}% of solo rate</p>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">${availability}</div>
+          `;
+          expertList.appendChild(card);
+        });
+      };
 
-      async function fetchConcepts() {
-        if (!conceptStatusEl || !conceptGrid) {
-          return;
-        }
-        conceptStatusEl.textContent = "Loading concepts from the live platform...";
+      const populateSelects = () => {
+        conceptSelect.innerHTML = '<option value="" disabled selected>Select a concept</option>';
+        expertSelect.innerHTML = '<option value="" disabled selected>Select an expert</option>';
+
+        conceptsCache.forEach((concept) => {
+          const option = document.createElement("option");
+          option.value = concept.id;
+          option.textContent = concept.title;
+          conceptSelect.appendChild(option);
+        });
+
+        expertsCache.forEach((expert) => {
+          const option = document.createElement("option");
+          option.value = expert.id;
+          option.textContent = expert.name;
+          expertSelect.appendChild(option);
+        });
+      };
+
+      const filterExpertsForConcept = (conceptId) => {
+        const filtered = conceptId
+          ? expertsCache.filter((expert) =>
+              expert.focus_areas.map((area) => area.toLowerCase()).includes(conceptId.toLowerCase())
+            )
+          : expertsCache;
+
+        expertSelect.innerHTML = '<option value="" disabled selected>Select an expert</option>';
+        filtered.forEach((expert) => {
+          const option = document.createElement("option");
+          option.value = expert.id;
+          option.textContent = expert.name;
+          expertSelect.appendChild(option);
+        });
+      };
+
+      const loadConcepts = async () => {
         try {
-          const response = await fetch(`${API_BASE}/concepts`);
-          if (!response.ok) {
-            throw new Error(`Status ${response.status}`);
-          }
-          const payload = await response.json();
-          const concepts = Array.isArray(payload) ? payload : Array.isArray(payload?.concepts) ? payload.concepts : [];
-          liveConcepts = concepts;
-          populateConceptOptions();
-          updateExpertOptions(conceptSelect?.value || "");
-          conceptStatusEl.textContent = concepts.length
-            ? `Loaded ${concepts.length} concepts from the live platform.`
-            : "No concepts available right now.";
-          conceptGrid.innerHTML = concepts.length
-            ? concepts
-                .map(
-                  (item) => `
-                  <article class="api-item">
-                    <h4>${item.title}</h4>
-                    <p>${item.summary || item.description || "No summary provided."}</p>
-                    ${item.why_it_matters ? `<p><strong>Why it matters:</strong> ${item.why_it_matters}</p>` : ""}
-                    ${renderModuleList(item.modules)}
-                  </article>
-                `
-                )
-                .join("")
-            : '<p class="status-message">No concepts available right now.</p>';
+          conceptList.innerHTML = "<p>Loading concepts…</p>";
+          const { concepts } = await fetchJSON("/concepts");
+          conceptsCache = concepts;
+          renderConcepts(conceptsCache);
+          populateSelects();
         } catch (error) {
-          conceptStatusEl.textContent = "Unable to load concepts from the API. Please try again later.";
-          conceptGrid.innerHTML = "";
-          liveConcepts = [];
-          populateConceptOptions();
-          updateExpertOptions("");
-          console.error(error);
+          conceptList.innerHTML = `<p class="status error">${error.message}</p>`;
         }
-      }
+      };
 
-      async function fetchExperts() {
-        if (!expertsStatusEl || !liveExpertsGrid) {
-          return;
-        }
-        expertsStatusEl.textContent = "Loading experts from the live platform...";
+      const loadExperts = async () => {
         try {
-          const response = await fetch(`${API_BASE}/experts`);
-          if (!response.ok) {
-            throw new Error(`Status ${response.status}`);
-          }
-          const payload = await response.json();
-          const experts = Array.isArray(payload) ? payload : Array.isArray(payload?.experts) ? payload.experts : [];
-          liveExperts = experts;
-          updateExpertOptions(conceptSelect?.value || "");
-          expertsStatusEl.textContent = experts.length
-            ? `Live roster: ${experts.length} experts currently published.`
-            : "No experts available right now.";
-          liveExpertsGrid.innerHTML = experts.length
-            ? experts.map((expert) => renderLiveExpert(expert)).join("")
-            : '<p class="status-message">No experts available right now.</p>';
+          expertList.innerHTML = "<p>Loading experts…</p>";
+          const { experts } = await fetchJSON("/experts");
+          expertsCache = experts;
+          renderExperts(expertsCache);
+          populateSelects();
         } catch (error) {
-          expertsStatusEl.textContent = "Unable to load live experts from the API. Please try again later.";
-          liveExpertsGrid.innerHTML = "";
-          liveExperts = [];
-          updateExpertOptions("");
-          console.error(error);
+          expertList.innerHTML = `<p class="status error">${error.message}</p>`;
         }
-      }
+      };
 
-      function setBookingStatus(message, type = "") {
-        if (!bookingStatus) {
-          return;
-        }
+      const resetStatus = () => {
+        bookingStatus.textContent = "";
+        bookingStatus.className = "";
+      };
+
+      const showStatus = (message, type) => {
         bookingStatus.textContent = message;
-        bookingStatus.className = `form-note${type ? ` ${type}` : ""}`;
-      }
+        bookingStatus.className = `status ${type}`;
+      };
 
-      conceptSelect?.addEventListener("change", (event) => {
-        updateExpertOptions(event.target.value);
-        setBookingStatus("", "");
-      });
-
-      expertSelect?.addEventListener("change", () => {
-        setBookingStatus("", "");
-      });
-
-      bookingForm?.addEventListener("submit", async (event) => {
+      bookingForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        resetStatus();
 
-        if (!conceptSelect || !expertSelect || !sessionStartInput || !sessionDurationInput) {
-          return;
-        }
-
-        const conceptId = conceptSelect.value;
-        if (!conceptId) {
-          setBookingStatus("Select a learning focus to continue.", "error");
-          conceptSelect.focus();
-          return;
-        }
-
-        const expertId = expertSelect.value;
-        if (!expertId) {
-          setBookingStatus("Choose an expert partner to continue.", "error");
-          expertSelect.focus();
-          return;
-        }
-
-        const startValue = sessionStartInput.value;
-        if (!startValue) {
-          setBookingStatus("Provide a preferred start time.", "error");
-          sessionStartInput.focus();
-          return;
-        }
-
-        const startDate = new Date(startValue);
-        if (Number.isNaN(startDate.valueOf())) {
-          setBookingStatus("Use a valid date and time for your session.", "error");
-          sessionStartInput.focus();
-          return;
-        }
-
-        const duration = Number(sessionDurationInput.value);
-        if (!Number.isFinite(duration) || duration <= 0) {
-          setBookingStatus("Enter a valid session duration.", "error");
-          sessionDurationInput.focus();
-          return;
-        }
-
-        const clientNameInput = document.getElementById("name");
-        const clientName = clientNameInput?.value.trim() || "";
-        if (!clientName) {
-          setBookingStatus("Add the primary contact name so we can confirm details.", "error");
-          clientNameInput?.focus();
-          return;
-        }
-
-        setBookingStatus("Submitting your request...", "");
-        if (submitButton) {
-          submitButton.disabled = true;
-        }
-
+        const formData = new FormData(bookingForm);
         const payload = {
-          concept_id: conceptId,
-          expert_id: expertId,
-          start_time: startDate.toISOString(),
-          duration_minutes: Math.round(duration),
-          client_name: clientName,
-          group_size: Math.max(1, Number(groupSizeInput?.value) || 1),
+          concept_id: formData.get("concept_id"),
+          expert_id: formData.get("expert_id"),
+          start_time: new Date(formData.get("start_time")).toISOString(),
+          duration_minutes: Number(formData.get("duration_minutes")),
+          client_name: formData.get("client_name"),
+          group_size: Number(formData.get("group_size")) || 1,
         };
+
+        showStatus("Submitting booking…", "");
 
         try {
           const response = await fetch(`${API_BASE}/bookings`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify(payload),
           });
 
           if (!response.ok) {
-            let detail = "We couldn't submit your booking right now. Please retry soon.";
-            try {
-              const errorBody = await response.json();
-              detail = errorBody?.detail || detail;
-            } catch (parseError) {
-              // ignore parse errors and use fallback message
-            }
+            const errorBody = await response.json().catch(() => null);
+            const detail = errorBody?.detail || "Unable to create booking. Please check availability.";
             throw new Error(detail);
           }
 
-          const data = await response.json();
-          const confirmation = data?.confirmation;
-          if (!confirmation) {
-            throw new Error("The platform did not return a confirmation payload, please try again.");
-          }
-
-          const startLabel = new Date(confirmation.start_time).toLocaleString();
-          setBookingStatus(
-            `Booking confirmed with ${confirmation.expert.name} on ${startLabel}. Reference ID: ${confirmation.booking_id}.`,
+          const { confirmation } = await response.json();
+          showStatus(
+            `Booking confirmed with ${confirmation.expert.name} on ${new Date(
+              confirmation.start_time
+            ).toLocaleString()}. Confirmation ID: ${confirmation.booking_id}.`,
             "success"
           );
           bookingForm.reset();
-          populateConceptOptions();
-          updateExpertOptions("");
+          populateSelects();
         } catch (error) {
-          setBookingStatus(error.message || "We couldn't submit your booking right now. Please retry soon.", "error");
-          console.error(error);
-        } finally {
-          if (submitButton) {
-            submitButton.disabled = false;
-          }
+          showStatus(error.message, "error");
         }
       });
 
-      document.getElementById("year").textContent = new Date().getFullYear();
+      conceptSelect.addEventListener("change", (event) => {
+        filterExpertsForConcept(event.target.value);
+      });
 
-      fetchConcepts();
-      fetchExperts();
+      navButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          const sectionId = event.currentTarget.dataset.section;
+          if (sectionId) {
+            setActiveSection(sectionId);
+            if (sectionId !== "home") {
+              document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+
+      const initialize = () => {
+        setYear();
+        loadConcepts();
+        loadExperts();
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initialize);
+      } else {
+        initialize();
+      }
     </script>
   </body>
 </html>
