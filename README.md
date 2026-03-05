@@ -33,3 +33,15 @@ Execute the unit test suite with:
 ```bash
 pytest
 ```
+
+## Running the ELK valuation model in Stata
+
+If you want to run the valuation logic entirely in Stata (without the API), use:
+
+```stata
+do stata/elk_valuation_model.do
+```
+
+The script defines an `elk_valuation_model` program that computes session valuation
+from `rate_per_hour`, `duration_minutes`, `group_size`, and `group_discount`, then
+shows an example output table.
