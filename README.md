@@ -33,3 +33,8 @@ Execute the unit test suite with:
 ```bash
 pytest
 ```
+
+## Wyoming elk natural capital MATLAB model
+
+A full herd-level MATLAB natural capital valuation workflow is included under `matlab/`.
+Run `run_wy_elk_capital_model` from MATLAB to estimate biological parameters, recover CAPN-style shadow prices, compute NPV/asset values, and generate herd/statewide figures.
